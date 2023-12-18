@@ -1,0 +1,1 @@
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\AWebServer\obj\Debug\awebserver.esproj.CoreCompileInputs.cache

@@ -1,0 +1,16 @@
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\bin\Debug\net6.0-windows\CrawlerUI.exe
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\bin\Debug\net6.0-windows\CrawlerUI.deps.json
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\bin\Debug\net6.0-windows\CrawlerUI.runtimeconfig.json
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\bin\Debug\net6.0-windows\CrawlerUI.dll
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\bin\Debug\net6.0-windows\CrawlerUI.pdb
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.Form1.resources
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.csproj.GenerateResource.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.AssemblyInfoInputs.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.AssemblyInfo.cs
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.csproj.CoreCompileInputs.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.dll
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\refint\CrawlerUI.dll
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.pdb
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\CrawlerUI.genruntimeconfig.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CrawlerUI\obj\Debug\net6.0-windows\ref\CrawlerUI.dll

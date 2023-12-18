@@ -1,0 +1,5 @@
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLab\obj\Debug\net5.0\CodeLab.csproj.AssemblyReference.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLab\obj\Debug\net5.0\CodeLab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLab\obj\Debug\net5.0\CodeLab.AssemblyInfoInputs.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLab\obj\Debug\net5.0\CodeLab.AssemblyInfo.cs
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLab\obj\Debug\net5.0\CodeLab.csproj.CoreCompileInputs.cache

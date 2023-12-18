@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Automation</name>
+    </assembly>
+    <members>
+        <member name="T:Automation.KeyBoardCommand">
+            <summary>
+            鍵盤命令
+            </summary>
+        </member>
+        <member name="T:Automation.FindAndClickCommand">
+            <summary>
+            從桌面找到視窗並點擊按鈕 <br/>
+            點擊過渡按鈕
+            </summary>
+        </member>
+        <member name="T:Automation.FindCommand">
+            <summary>
+            從桌面找到視窗 <br/>
+            </summary>
+        </member>
+        <member name="T:Automation.App">
+            <summary>
+            所有操作的入口
+            </summary>
+        </member>
+        <member name="T:Automation.AppElement">
+            <summary>
+            App 內 Control 元素
+            </summary>
+        </member>
+        <member name="T:Automation.Finder">
+            <summary>
+            最基礎的尋找元素，搜尋視窗
+            </summary>
+        </member>
+        <member name="M:Automation.Finder.Find(System.String)">
+            <summary>
+            尋找元素
+            </summary>
+        </member>
+        <member name="M:Automation.Finder.Handle(System.String)">
+            <summary>
+            尋找元素 Template
+            </summary>
+        </member>
+        <member name="T:Automation.Broadcast">
+            <summary>
+            廣播
+            </summary>
+        </member>
+        <member name="T:Automation.Core_v2">
+            <summary>
+            包裝了 UIA3
+            </summary>
+        </member>
+        <member name="T:Automation.AutoService">
+            <summary>
+            User 使用的所有 API Facade
+            </summary>
+        </member>
+        <member name="M:Automation.AutoService.GetWindowByParent(Automation.AutoUI,FlaUI.Core.Conditions.PropertyCondition)">
+            <summary>
+            從父取得視窗
+            </summary>
+        </member>
+        <member name="M:Automation.AutoService.GetControlByParent(Automation.AutoUI,FlaUI.Core.Conditions.PropertyCondition)">
+            <summary>
+            從父取得甕志向
+            </summary>
+        </member>
+        <member name="M:Automation.AutoService.InvokeMethod(System.Object,System.String,System.Object[])">
+            <summary>
+            映射方法並呼叫
+            </summary>
+        </member>
+    </members>
+</doc>

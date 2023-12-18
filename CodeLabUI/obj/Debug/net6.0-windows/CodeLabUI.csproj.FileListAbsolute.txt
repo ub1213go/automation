@@ -1,0 +1,16 @@
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\bin\Debug\net6.0-windows\CodeLabUI.exe
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\bin\Debug\net6.0-windows\CodeLabUI.deps.json
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\bin\Debug\net6.0-windows\CodeLabUI.runtimeconfig.json
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\bin\Debug\net6.0-windows\CodeLabUI.dll
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\bin\Debug\net6.0-windows\CodeLabUI.pdb
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.Form1.resources
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.csproj.GenerateResource.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.AssemblyInfoInputs.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.AssemblyInfo.cs
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.csproj.CoreCompileInputs.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.dll
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\refint\CodeLabUI.dll
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.pdb
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\CodeLabUI.genruntimeconfig.cache
+C:\Users\ub\OneDrive\Code\csharp\CodeLab\CodeLabUI\obj\Debug\net6.0-windows\ref\CodeLabUI.dll
