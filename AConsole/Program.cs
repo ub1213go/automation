@@ -11,27 +11,29 @@ namespace AConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
             var auto = new Autofac();
-
             auto.Register(typeof(ConsoleMenu));
             auto.Register(typeof(ConsoleMenuInteractor));
             var menu = auto.Get<ConsoleMenuInteractor>();
 
-            var str = "123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345";
-            menu.Add(str);
-            menu.Add(str);
-            menu.Add(str);
-            menu.Add(str);
-            menu.Add(str);
-            menu.Add(str);
-            menu.Add(str);
-            menu.Add(str);
-            menu.Add(str);
-            menu.Start();
-            Console.WriteLine(menu.View.PageCount); 
+            //var str = "123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345123451234512345";
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Add(str);
+            //menu.Start();
+            //Console.WriteLine(menu.View.PageCount); 
 
+            var ci = new ConsoleItem("-----");
+            ci.x = 10;
+            ci.y = 20;
+
+            menu.View.Render(ci);
         }
     }
 
@@ -124,7 +126,7 @@ namespace AConsole
         }
     }
 
-    public class ConsoleMenuView
+    public class ConsoleMenuView : IRenderable<ConsoleItem>
     {
         public ConsoleMenu Menu { get; set; }
 
@@ -202,6 +204,13 @@ namespace AConsole
             }
         }
 
+        public void Render(ConsoleItem item)
+        {
+            var (x, y) = Console.GetCursorPosition();
+            Console.SetCursorPosition(item.x, item.y);
+            Console.WriteLine(item);
+            Console.SetCursorPosition(x, y);
+        }
     }
 
     public class ConsoleMenuPage
@@ -239,9 +248,12 @@ namespace AConsole
         }
     }
 
-    public class ConsoleItem
+    public class ConsoleItem : IPoint
     {
         public string Item { get; set; }
+
+        public int x { get; set; }
+        public int y { get; set; }
 
         protected int IndentCount = 3;
 
@@ -393,6 +405,17 @@ namespace AConsole
                     return MenuItem.Indent(LineIndex) + Line;
             }
         }
+    }
+
+    public interface IPoint
+    {
+        int x { get; set; }
+        int y { get; set; }
+    }
+
+    public interface IRenderable<T>
+    {
+        void Render(T obj);
     }
 }
 
