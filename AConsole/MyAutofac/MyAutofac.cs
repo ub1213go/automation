@@ -43,7 +43,7 @@ namespace AConsole.MyAutofac
         T Get<T>(Autofac auto);
     }
 
-    public abstract class AutofacStateTemplate : IAutoState
+    public abstract class AutofacTemplate : IAutoState
     {
         protected T Base<T>(Autofac auto)
         {
@@ -87,7 +87,7 @@ namespace AConsole.MyAutofac
         }
     }
 
-    public class AutofacMultiple : AutofacStateTemplate
+    public class AutofacMultiple : AutofacTemplate
     {
         public T Get<T>(Autofac auto)
         {
