@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Dynamitey;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,15 +10,48 @@ namespace AConsole.MyAutofac
 {
     public class Autofac
     {
-        Dictionary<Type, Type> Dict
+        internal protected Dictionary<Type, Type> Dict
             = new Dictionary<Type, Type>();
 
-        public T Get<T>() where T : class
+        internal protected Dictionary<Type, object> List
+            = new Dictionary<Type, object>();
+
+        internal protected IAutoState State;
+
+        public virtual T Get<T>() where T : class
         {
-            Dict.TryGetValue(typeof(T), out var type);
+            return State.Get<T>(this);
+        }
+
+        public Autofac Register<T>(Type type)
+        {
+            Dict.Add(typeof(T), type);
+
+            return this;
+        }
+
+        public Autofac Register(Type type)
+        {
+            Dict.Add(type, type);
+
+            return this;
+        }
+    }
+
+    public interface IAutoState
+    {
+        T Get<T>(Autofac auto);
+    }
+
+    public abstract class AutofacStateTemplate : IAutoState
+    {
+        protected T Base<T>(Autofac auto)
+        {
+            auto.Dict.TryGetValue(typeof(T), out var type);
 
             if (type == null) throw new Exception($"{typeof(T).Name} 尚未註冊");
 
+            // 取第一個建構子
             var cont = type.GetConstructors()[0];
             var cont_params = cont.GetParameters();
             var props = new object?[cont_params.Length];
@@ -29,7 +64,51 @@ namespace AConsole.MyAutofac
                     continue;
                 }
 
-                Dict.TryGetValue(para.ParameterType, out var para_type);
+                auto.Dict.TryGetValue(para.ParameterType, out var para_type);
+
+                if (para_type == null) throw new Exception($"{para.ParameterType.Name} 尚未註冊");
+
+                props[i] = GetType()
+                    .GetMethod("Get")?
+                    .MakeGenericMethod(new Type[]{ para.ParameterType })
+                    .Invoke(this, null);
+
+            }
+            return (T)cont.Invoke(props);
+        } 
+
+        protected virtual T Final<T>(T t)
+        {
+            return t;
+        }
+
+        public T Get<T>(Autofac auto)
+        {
+        }
+    }
+
+    public class AutofacMultiple : AutofacStateTemplate
+    {
+        public T Get<T>(Autofac auto)
+        {
+            auto.Dict.TryGetValue(typeof(T), out var type);
+
+            if (type == null) throw new Exception($"{typeof(T).Name} 尚未註冊");
+
+            // 取第一個建構子
+            var cont = type.GetConstructors()[0];
+            var cont_params = cont.GetParameters();
+            var props = new object?[cont_params.Length];
+            for(int i = 0; i < cont_params.Length; i++)
+            {
+                var para = cont_params[i];
+                if (para.HasDefaultValue)
+                {
+                    props[i] = para.DefaultValue;
+                    continue;
+                }
+
+                auto.Dict.TryGetValue(para.ParameterType, out var para_type);
 
                 if (para_type == null) throw new Exception($"{para.ParameterType.Name} 尚未註冊");
 
@@ -41,15 +120,41 @@ namespace AConsole.MyAutofac
             }
             return (T)cont.Invoke(props);
         }
+    }
 
-        public void Register<T>(Type type)
+    public class AutofacSingle : IAutoState
+    {
+        public T Get<T>(Autofac auto)
         {
-            Dict.Add(typeof(T), type);
-        }
+            auto.Dict.TryGetValue(typeof(T), out var type);
 
-        public void Register(Type type)
-        {
-            Dict.Add(type, type);
+            if (type == null) throw new Exception($"{typeof(T).Name} 尚未註冊");
+
+            // 取第一個建構子
+            var cont = type.GetConstructors()[0];
+            var cont_params = cont.GetParameters();
+            var props = new object?[cont_params.Length];
+            for(int i = 0; i < cont_params.Length; i++)
+            {
+                var para = cont_params[i];
+                if (para.HasDefaultValue)
+                {
+                    props[i] = para.DefaultValue;
+                    continue;
+                }
+
+                auto.Dict.TryGetValue(para.ParameterType, out var para_type);
+
+                if (para_type == null) throw new Exception($"{para.ParameterType.Name} 尚未註冊");
+
+                props[i] = GetType()
+                    .GetMethod("Get")?
+                    .MakeGenericMethod(new Type[]{ para.ParameterType })
+                    .Invoke(this, null);
+
+            }
+
+            return (T)cont.Invoke(props);
         }
     }
 }

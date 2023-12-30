@@ -14,89 +14,89 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            var autoService = new AutoService();
-            var ja = JsonConvert.DeserializeObject<JArray>(new AutoJson().Test1());
-            var table = new Dictionary<string, AutoUI>();
-            if (ja == null) return;
-            foreach(JObject j in ja)
-            {
-                var aj = j.ToObject<AutoJson>();
+            //var autoService = new AutoService();
+            //var ja = JsonConvert.DeserializeObject<JArray>(new AutoJson().Test1());
+            //var table = new Dictionary<string, AutoUI>();
+            //if (ja == null) return;
+            //foreach(JObject j in ja)
+            //{
+            //    var aj = j.ToObject<AutoJson>();
 
-                if (aj != null)
-                {
-                    AutoUI? ele = null;
-                    PropertyCondition? pc = null;
-                    if (!String.IsNullOrEmpty(aj.Parent))
-                    {
-                        var parameters = autoService.Core.AutoCore
-                            .ConditionFactory?
-                            .GetType()?
-                            .GetMethod("By" + aj.From)?
-                            .GetParameters();
-                        var providerArgs = new object[]
-                        {
-                            aj?.Name ?? ""
-                        };
-                        if ((parameters?.Length ?? 0) == 0) throw new Exception($"{aj.From} 此方法無參數，與預期不同");
+            //    if (aj != null)
+            //    {
+            //        AutoUI? ele = null;
+            //        PropertyCondition? pc = null;
+            //        if (!String.IsNullOrEmpty(aj.Parent))
+            //        {
+            //            var parameters = autoService.Core.AutoCore
+            //                .ConditionFactory?
+            //                .GetType()?
+            //                .GetMethod("By" + aj.From)?
+            //                .GetParameters();
+            //            var providerArgs = new object[]
+            //            {
+            //                aj?.Name ?? ""
+            //            };
+            //            if ((parameters?.Length ?? 0) == 0) throw new Exception($"{aj.From} 此方法無參數，與預期不同");
 
-                        object[] props = new object[parameters.Length];
-                        for (int i = 0; i < props.Length; i++)
-                        {
-                            if (i < providerArgs.Length)
-                            {
-                                props[i] = providerArgs[i];
-                            }
-                            else if (parameters[i].HasDefaultValue)
-                            {
-                                props[i] = parameters[i].DefaultValue;
-                            }
-                            else
-                            {
-                                throw new ArgumentException("not enough arguments provided");
-                            }
-                        }
-                        pc = (PropertyCondition?)autoService.Core.AutoCore
-                            .ConditionFactory?
-                            .GetType()?
-                            .GetMethod("By" + aj.From)?
-                            .Invoke(
-                                autoService.Core.AutoCore.ConditionFactory,
-                                new object[] {aj?.Name ?? ""}
-                            );
-                        if (pc == null) throw new DataException("PropertyCondition 是空的");  
-                        switch (aj?.EnumType)
-                        {
-                            case AutoJson.EType.Window:
-                                ele = autoService.GetWindowByParent(table[aj?.Name ?? ""], pc);
-                                break;
-                            case AutoJson.EType.Control:
-                                ele = autoService.GetControlByParent(table[aj?.Name ?? ""], pc);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        ele = autoService.GetWindow(aj?.Name ?? "");
-                    }
+            //            object[] props = new object[parameters.Length];
+            //            for (int i = 0; i < props.Length; i++)
+            //            {
+            //                if (i < providerArgs.Length)
+            //                {
+            //                    props[i] = providerArgs[i];
+            //                }
+            //                else if (parameters[i].HasDefaultValue)
+            //                {
+            //                    props[i] = parameters[i].DefaultValue;
+            //                }
+            //                else
+            //                {
+            //                    throw new ArgumentException("not enough arguments provided");
+            //                }
+            //            }
+            //            pc = (PropertyCondition?)autoService.Core.AutoCore
+            //                .ConditionFactory?
+            //                .GetType()?
+            //                .GetMethod("By" + aj.From)?
+            //                .Invoke(
+            //                    autoService.Core.AutoCore.ConditionFactory,
+            //                    new object[] {aj?.Name ?? ""}
+            //                );
+            //            if (pc == null) throw new DataException("PropertyCondition 是空的");  
+            //            switch (aj?.EnumType)
+            //            {
+            //                case AutoJson.EType.Window:
+            //                    ele = autoService.GetWindowByParent(table[aj?.Name ?? ""], pc);
+            //                    break;
+            //                case AutoJson.EType.Control:
+            //                    ele = autoService.GetControlByParent(table[aj?.Name ?? ""], pc);
+            //                    break;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            ele = autoService.GetWindow(aj?.Name ?? "");
+            //        }
 
-                    if(ele != null)
-                    {
-                        table.TryAdd(aj?.ID ?? "", ele);
+            //        if(ele != null)
+            //        {
+            //            table.TryAdd(aj?.ID ?? "", ele);
 
-                        switch (aj?.EnumAction)
-                        {
-                            case AutoJson.EAction.Click:
-                                ele?.AutomationElement?.AsButton().Click();
-                                break;
-                            case AutoJson.EAction.Focus:
-                                ele?.AutomationElement?.Focus();
-                                break;
-                        }
-                    }
-                }
-            }
+            //            switch (aj?.EnumAction)
+            //            {
+            //                case AutoJson.EAction.Click:
+            //                    ele?.AutomationElement?.AsButton().Click();
+            //                    break;
+            //                case AutoJson.EAction.Focus:
+            //                    ele?.AutomationElement?.Focus();
+            //                    break;
+            //            }
+            //        }
+            //    }
+            //}
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 

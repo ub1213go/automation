@@ -84,3 +84,5 @@ D:\OneDrive\Code\csharp\CodeLab\AConsole\obj\Debug\net6.0\refint\AConsole.dll
 D:\OneDrive\Code\csharp\CodeLab\AConsole\obj\Debug\net6.0\AConsole.pdb
 D:\OneDrive\Code\csharp\CodeLab\AConsole\obj\Debug\net6.0\AConsole.genruntimeconfig.cache
 D:\OneDrive\Code\csharp\CodeLab\AConsole\obj\Debug\net6.0\ref\AConsole.dll
+D:\OneDrive\Code\csharp\CodeLab\AConsole\bin\Debug\net6.0\Dynamitey.dll
+D:\OneDrive\Code\csharp\CodeLab\AConsole\bin\Debug\net6.0\ImpromptuInterface.dll

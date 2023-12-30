@@ -2,13 +2,18 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ImpromptuInterface" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ASqlite\ASqlite.csproj" />
+    <ProjectReference Include="..\Automation\Automation.csproj" />
   </ItemGroup>
 
 </Project>

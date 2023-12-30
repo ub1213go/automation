@@ -15,4 +15,7 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft\Xamarin\NuGet\" />
     <SourceRoot Include="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\" />
   </ItemGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgInterop_UIAutomationClient Condition=" '$(PkgInterop_UIAutomationClient)' == '' ">C:\Users\ub\.nuget\packages\interop.uiautomationclient\10.19041.0</PkgInterop_UIAutomationClient>
+  </PropertyGroup>
 </Project>

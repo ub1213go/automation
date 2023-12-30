@@ -208,8 +208,9 @@ namespace Automation
     /// </summary>
     public class AutoService
     {
-
         public Core_v2 Core { get; set; } = Core_v2.Instance;
+
+        public ConditionFactory ConditionFactory => Core.AutoCore.ConditionFactory;
 
         public AutoUI? GetWindow(string title)
         {
@@ -281,6 +282,29 @@ namespace Automation
             return method.Invoke(obj, props);
         }
 
+        public IEnumerable<string> GetAllWindowTitle()
+        {
+            var handles = GetOpenWindowHandles();
+            var sb = new StringBuilder(100);
+            foreach(var handle in handles)
+            {
+                GetWindowText(handle, sb, 100);
+
+                yield return sb.ToString();
+            }
+        }
+
+        public IEnumerable<string> GetWindowListByParent(AutoUI parent, PropertyCondition propertyCondition)
+        {
+            yield return "";
+        }
+
+        public IEnumerable<string> GetControlListByParent(AutoUI parent, PropertyCondition propertyCondition)
+        {
+            yield return "";
+        }
+
+
         protected delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
         [DllImport("user32.dll")]
@@ -306,7 +330,7 @@ namespace Automation
                 if (GetWindowText(hWnd, title, nChars) > 0)
                 {
                     // Print or store the window handle
-                    Console.WriteLine($"Window Title: {title}, Handle: {hWnd}");
+                    //Console.WriteLine($"Window Title: {title}, Handle: {hWnd}");
                     windowHandles.Add(hWnd);
                 }
 
@@ -378,7 +402,8 @@ namespace Automation
         {
             return new AutoUIWindow(autoUI.Core)
             {
-                AutomationElement = autoUI.Core.AutoCore.GetDesktop().FindFirstDescendant(PropertyCondition)
+                //AutomationElement = autoUI.Core.AutoCore.GetDesktop().FindFirstDescendant(PropertyCondition)
+                AutomationElement = autoUI.AutomationElement?.FindFirstDescendant(PropertyCondition)
             };
         }
     }
