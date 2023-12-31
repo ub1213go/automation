@@ -209,7 +209,6 @@ namespace Automation
     public class AutoService
     {
         public Core_v2 Core { get; set; } = Core_v2.Instance;
-
         public ConditionFactory ConditionFactory => Core.AutoCore.ConditionFactory;
 
         public AutoUI? GetWindow(string title)
@@ -238,7 +237,6 @@ namespace Automation
             }
             return null;
         }
-
         /// <summary>
         /// 從父取得視窗
         /// </summary>
@@ -246,7 +244,6 @@ namespace Automation
         {
             return parent.Reduce(new AutoConditionByWindow(propertyCondition));
         }
-
         /// <summary>
         /// 從父取得甕志向
         /// </summary>
@@ -254,7 +251,18 @@ namespace Automation
         {
             return parent.Reduce(new AutoConditionByControl(propertyCondition));
         }
-
+        /// <summary>
+        /// 從父取得特定位置的 Control
+        /// </summary>
+        public AutoUI? GetControlByParent(AutoUI parent, int position)
+        {
+            return new AutoUIControl(Core)
+            {
+                AutomationElement = parent.AutomationElement
+                    .FindAllChildren()
+                    .ElementAt(position)
+            };
+        }
         /// <summary>
         /// 映射方法並呼叫
         /// </summary>
@@ -281,7 +289,6 @@ namespace Automation
 
             return method.Invoke(obj, props);
         }
-
         public IEnumerable<string> GetAllWindowTitle()
         {
             var handles = GetOpenWindowHandles();
@@ -293,15 +300,19 @@ namespace Automation
                 yield return sb.ToString();
             }
         }
-
-        public IEnumerable<string> GetWindowListByParent(AutoUI parent, PropertyCondition propertyCondition)
+        public IEnumerable<string> GetWindowListByParent(AutoUI parent)
         {
-            yield return "";
+            foreach(var child in parent.AutomationElement.FindAllChildren())
+            {
+                yield return child.ToString();
+            }
         }
-
-        public IEnumerable<string> GetControlListByParent(AutoUI parent, PropertyCondition propertyCondition)
+        public IEnumerable<string> GetControlListByParent(AutoUI parent)
         {
-            yield return "";
+            foreach(var child in parent.AutomationElement.FindAllChildren())
+            {
+                yield return child.ToString();
+            }
         }
 
 
@@ -359,7 +370,6 @@ namespace Automation
 
         public abstract AutoUI Reduce(AutoCondition autoCondition);
     }
-
     public class AutoUIWindow : AutoUI
     {
         public AutoUIWindow(Core_v2 core_v2) : base(core_v2) { }
@@ -369,7 +379,6 @@ namespace Automation
             return autoCondition.Transform(this);
         }
     }
-
     public class AutoUIControl : AutoUI
     {
         public AutoUIControl(Core_v2 core_v2) : base(core_v2) { }
@@ -379,7 +388,6 @@ namespace Automation
             return autoCondition.Transform(this);
         }
     }
-
 
     public abstract class AutoCondition
     {
@@ -391,7 +399,6 @@ namespace Automation
 
         public abstract AutoUI Transform(AutoUI autoUI);
     }
-
     public class AutoConditionByWindow : AutoCondition
     {
         public AutoConditionByWindow(PropertyCondition propertyCondition) : base(propertyCondition)
@@ -402,12 +409,10 @@ namespace Automation
         {
             return new AutoUIWindow(autoUI.Core)
             {
-                //AutomationElement = autoUI.Core.AutoCore.GetDesktop().FindFirstDescendant(PropertyCondition)
                 AutomationElement = autoUI.AutomationElement?.FindFirstDescendant(PropertyCondition)
             };
         }
     }
-
     public class AutoConditionByControl : AutoCondition
     {
         public AutoConditionByControl(PropertyCondition propertyCondition) : base(propertyCondition)

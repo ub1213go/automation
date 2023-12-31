@@ -5,11 +5,14 @@ using Automation;
 using AConsole.Model;
 using System.Drawing;
 using AConsole.Model.ConsoleUI;
+using Automation.Draw;
 
 namespace AConsole
 {
     public class Program
     {
+        public static AutoService service = new AutoService();
+        public static Draw? draw = null;
         static void Main(string[] args)
         {
             var auto = new Autofac();
@@ -17,64 +20,147 @@ namespace AConsole
             auto.Register(typeof(ConsolePage));
             auto.Register(typeof(ConsoleMenu));
             auto.Register(typeof(AutoService));
+            auto.Single().Register(typeof(ConsoleCursor));
 
+            auto.Register(typeof(ConsoleHint))
+                .WithParameter("hint", new object[]{
+                    auto.Get<ConsoleCursor>(),
+                    new ConsoleView(auto.Get<ConsoleCursor>(), new Model.Rectangle(
+                        0,
+                        Console.WindowHeight / 6 * 5,
+                        Console.WindowWidth,
+                        Console.WindowHeight
+                    )),
+                    6
+                });
+
+            var hint = auto.Get<ConsoleHint>("hint");
             var menu = auto.Get<ConsoleMenu>();
-            var srv = auto.Get<AutoService>();
+            var page = auto.Get<ConsolePage>();
+            //AllObject(auto);
+            //var service = new AutoService();
+            var count = 0;
 
-            foreach(var t in srv.GetAllWindowTitle())
+            hint.SetHint("Q: 離開");
+            hint.SetHint("J: 光標移至下一個");
+            hint.SetHint("K: 光標移至上一個");
+            hint.SetHint("M: 紅框標記");
+            hint.SetHint("Enter: 進入下一層");
+            hint.SetHint("ESC: 回到上一層");
+            AutoUI? control = null;
+            RefreshMenu(menu, ref control);
+            while (true)
             {
-                menu.SetMenu(t);
+                page.Clear();
+                page.Render(menu);
+                var key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.Q:
+                        goto Done;
+                    case ConsoleKey.J:
+                        menu.Position++;
+                        break;
+                    case ConsoleKey.K:
+                        menu.Position--;
+                        break;
+                    case ConsoleKey.Enter:
+                        // control == null -> 在桌面
+                        if (control == null)
+                        {
+                            control = service.GetWindow(menu.Menus[menu.Position]);
+                        }
+                        // control != null -> 視窗
+                        else
+                        {
+                            control = service
+                                .GetControlByParent(control, menu.Position);
+                        }
+                        RefreshMenu(menu, ref control);
+                        break;
+                    case ConsoleKey.Escape:
+                        if(control != null)
+                        {
+                            control = new AutoUIWindow(service.Core)
+                            {
+                                AutomationElement = control.AutomationElement.Parent
+                            };
+                        }
+                        RefreshMenu(menu, ref control);
+                        break;
+                    case ConsoleKey.M:
+                        if (draw != null)
+                        {
+                            draw.Stop();
+                            draw = null;
+                        }
+                        else
+                        {
+                            // 紅框框起光標指到的項目
+                            if (control == null)
+                            {
+                                draw = new Draw(
+                                    service.GetWindow(
+                                        menu.Menus[menu.Position]
+                                    ).AutomationElement.BoundingRectangle
+                                );
+                                draw.Start();
+                            }
+                            else
+                            {
+                                draw = new Draw(
+                                    service.GetControlByParent(
+                                        control,
+                                        menu.Position
+                                    ).AutomationElement.BoundingRectangle
+                                );
+                                draw.Start();
+                            }
+                        }
+                        break;
+                    case ConsoleKey.T:
+                        AllObject(auto);
+                        break;
+                }
+
             }
 
-            // todo: 建立可換頁，可選擇的 menu
-            var page = auto.Get<ConsolePage>();
+        Done: return;
+        }
 
-            var page_hint = auto.Get<ConsolePage>();
-            var menu_hint = auto.Get<ConsoleMenu>();
-            menu_hint.SetMenu("A: 測試")
-                .SetMenu("B: 測試");
-            page_hint.Render(menu_hint);
+        static void AllObject(Autofac auto)
+        {
+            foreach (var obj in auto.ObjectDict)
+            {
+                for (int i = 0; i < obj.Value.Count; i++)
+                {
+                    var o = obj.Value[i];
 
-            //while (true)
-            //{
-            //    page.Clear();
-            //    page.Render(menu);
-            //    var key = Console.ReadKey().Key;
-            //    switch (key)
-            //    {
-            //        case ConsoleKey.UpArrow:
-            //            menu.Position--;
-            //            break;
-            //        case ConsoleKey.DownArrow:
-            //            menu.Position++;
-            //            break;
-            //        case ConsoleKey.Enter:
-            //            break;
-            //    }
-            //}
+                    Console.WriteLine($"{i + 1}. " + o.GetType().Name);
+                }
+            }
+        }
 
-            Console.ReadKey();
-
-
-            //var service = new AutoService();
-
-            //var count = 0;
-            //foreach (var title in service.GetAllWindowTitle())
-            //{
-            //    view.Write($"{++count}. {title}");
-            //}
-
-            //var win = service.GetWindow("訊息公告");
-
-            //var children = win.AutomationElement.FindAllChildren();
-            //count = 0;
-            //foreach(var child in children)
-            //{
-            //    if(count == 0) view.Clear();
-            //    var text = child.ToString();
-            //    text = text.Substring(0, text.Length > 100 ? 100 : text.Length);
-            //    view.Write($"{++count}. {text}");
-            //}
+        static void RefreshMenu(ConsoleMenu menu, ref AutoUI? control)
+        {
+            menu.Position = 0;
+            menu.Menus.Clear();
+            // 檢查是否為桌面，或者第一次讀取
+            if(control == null || control.AutomationElement == null || control.AutomationElement.Parent == null)
+            {
+                control = null;
+                foreach (var title in service.GetAllWindowTitle())
+                {
+                    menu.SetMenu($"{title}");
+                }
+            }
+            else
+            {
+                foreach(var c in service.GetControlListByParent(control))
+                {
+                    menu.SetMenu(c);
+                }
+            }
         }
     }
 }

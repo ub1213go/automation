@@ -43,6 +43,9 @@ namespace AConsole.Model.ConsoleUI
             if (Position < ViewRect.RightBottom.Y)
                 Position++;
         }
+
+        public int Width => ViewRect.RightBottom.X - ViewRect.LeftTop.X;
+        public int Height => ViewRect.RightBottom.Y - ViewRect.LeftTop.Y;
     }
 
 }
