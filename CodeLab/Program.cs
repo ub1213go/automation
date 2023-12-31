@@ -1,34 +1,58 @@
 ﻿using ASqlite;
 using Dapper;
+using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Program
 {
     public class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             var sql = new Sqlite();
+            SqliteOutput.Show = true;
 
-            sql.DropTable(typeof(AutomationFlow));
-            sql.CreateTable(typeof(AutomationFlow));
-            sql.Create(new AutomationFlow()
-            {
-                FlowName = "自動報稅",
-                FlowSeries = 1,
-                FlowContent = "",
-            });
+            #region 建立 Table
+            //sql.DropTable(typeof(AutomationFlow));
+            //sql.CreateTable(typeof(AutomationFlow));
+            //sql.Create(new AutomationFlow()
+            //{
+            //    FlowName = "自動報稅",
+            //    FlowSeries = 1,
+            //    FlowContent = "",
+            //});
+            #endregion
 
-            var items = sql.Read<AutomationFlow>(0, 10);
-            foreach (var item in items)
-            {
-                Console.WriteLine(item);
-            }
+            #region Sqlite 語法
+            //var items = sql.Read<AutomationFlow>(0, 10);
+            //foreach (var item in items)
+            //{
+            //    Console.WriteLine(item);
+            //}
             //var res = sql.Read<int>("SELECT COUNT(*) FROM AutomationFlow");
             //var res = sql.Read<int>("SELECT MAX(FlowSeries) FROM AutomationFlow");
             //var res = sql.Conn.QuerySingle<int>("SELECT MAX(FlowSeries) FROM AutomationFlow WHERE FlowName = @FlowName", new { FlowName = "自動報稅"});
 
             //Console.WriteLine(res);
+            #endregion
+
+            #region 讀取檔案
+            //using (var fbd = new FolderBrowserDialog())
+            //{
+            //    DialogResult result = fbd.ShowDialog();
+
+            //    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            //    {
+            //        string[] files = Directory.GetFiles(fbd.SelectedPath);
+
+            //        System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+            //    }
+            //}
+            #endregion
+
+
         }
     }
 

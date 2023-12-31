@@ -50,7 +50,7 @@ namespace ASqlite
 
     public static class SqliteOutput
     {
-        public static bool Show = true;
+        public static bool Show = false;
         public static void Write(string msg)
         {
             if(Show) Console.Write(msg);
