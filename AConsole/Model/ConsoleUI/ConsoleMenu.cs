@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 
 namespace AConsole.Model.ConsoleUI
 {
-    public class ConsoleMenu : IEnumerable<string>
+    public class ConsoleMenu : KeyIntractive, IEnumerable<string>
     {
-        public List<string> Menus { get; set; }
+        private List<string> Menus { get; set; }
             = new List<string>();
+        private int _Position;
 
         public int Length => Menus.Count;
         public string Current => Menus[Position];
-
-        private int _Position;
-
         public int Position
         {
             get
@@ -43,24 +41,19 @@ namespace AConsole.Model.ConsoleUI
                 Menus[index] = value;
             }
         }
-
-        public ConsoleMenu()
-        {
-
-        }
-
-        public ConsoleMenu SetMenu(string menu)
+        public void SetMenu(string menu)
         {
             Menus.Add(menu);
-
-            return this;
         }
-
+        public void Clear()
+        {
+            Position = 0;
+            Menus.Clear();
+        }
         public IEnumerator<string> GetEnumerator()
         {
             return Menus.GetEnumerator();
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

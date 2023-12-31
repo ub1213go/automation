@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace AConsole.Model
 {
-    public interface IObservable<T>
+    public interface IObservable
     {
-        void Subscription(IObserver<T> observer);
+        void Subscription(IObserver observer, ConsoleKey key);
+        void Notify(ConsoleKey key);
     }
-
-    public interface IObserver<T>
+    public interface IObserver
     {
-        void Notify(T t);
+        void Update();
     }
 }
