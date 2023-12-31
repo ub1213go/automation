@@ -8,7 +8,7 @@ namespace AConsole.Model
 {
     public class KeyIntractive : IObservable
     {
-        private int loopLimit = 100;
+        private int loopLimit = 1000;
         private HashSet<IObserver> Subscribers
             = new HashSet<IObserver>();
         private Dictionary<ConsoleKey, IObserver> SpecifyNotify

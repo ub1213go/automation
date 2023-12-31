@@ -7,6 +7,9 @@ using System.Drawing;
 using AConsole.Model.ConsoleUI;
 using Automation.Draw;
 using System.Text;
+using System.Diagnostics;
+using Interop.UIAutomationClient;
+using ImpromptuInterface;
 
 namespace AConsole
 {
@@ -50,6 +53,7 @@ namespace AConsole
             hint.SetHint("F: 取得焦點");
             hint.SetHint("C: 點擊");
             hint.SetHint("I: 輸入");
+            hint.SetHint("G: 5秒後取得焦點視窗");
 
             AutoUI? autoUI = null;
 
@@ -67,8 +71,23 @@ namespace AConsole
             }), ConsoleKey.K);
             menu.Subscription(new KeyEvent(() =>
             {
+                //var pid = Convert.ToInt32(menu.Current.Split(",").First().Replace("pid: ", ""));
+                //var pcs = Process.GetProcessById(pid);
+                //var ths = pcs.Threads;
+                //foreach(ProcessThread th in ths)
+                //{
+                //    var sb = new StringBuilder(100);
+                //    AutoService.EnumThreadWindows(th.Id, (hWnd, lParam) =>
+                //    {
+                //        var res = AutoService.GetWindowText(hWnd, sb, 100);
+                //        var t = service.Core.AutoCore.FromHandle(hWnd);
+                //        Console.WriteLine(sb);
+                //        return res > 0;
+                //    }, IntPtr.Zero);
+                //}
                 if (autoUI == null)
-                    autoUI = service.GetWindow(menu.Current);
+                    //autoUI = service.GetWindow(String.Join("", menu.Current.Split(",").Skip(1)));
+                    autoUI = new AutoUIWindow(service.Core, service.Core.AutoCore.FromHandle(IntPtr.Parse(menu.Current.Split(",").First().Replace("hwd: ", ""))));
                 else
                     autoUI = service.GetControlByParent(autoUI, menu.Position);
                 RefreshMenu(menu, ref autoUI);
@@ -117,6 +136,27 @@ namespace AConsole
 
                 }
             }), ConsoleKey.F);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                menu.Notify(ConsoleKey.Enter);
+                try
+                {
+                    autoUI.AutomationElement.Click();
+                }
+                catch
+                {
+
+                }
+            }), ConsoleKey.C);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                Thread.Sleep(5000);
+                IntPtr hwd = AutoService.GetForegroundWindow();
+                autoUI = new AutoUIWindow(service.Core, service.Core.AutoCore.FromHandle(hwd));
+                int pcsId = 0;
+                AutoService.GetWindowThreadProcessId(hwd, out pcsId);
+                RefreshMenu(menu, ref autoUI);
+            }), ConsoleKey.G);
 
             RefreshMenu(menu, ref autoUI);
             foreach (var count in menu.Run())

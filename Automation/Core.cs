@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -285,7 +286,23 @@ namespace Automation
             var sb = new StringBuilder(100);
             foreach(var handle in handles)
             {
+                var processId = 0;
+                GetWindowThreadProcessId(handle, out processId);
+
+                //var ths = Process.GetProcessById(processId).Threads;
+                //foreach (ProcessThread th in ths)
+                //{
+                //    EnumThreadWindows(th.Id, (hWnd, lParam) =>
+                //    {
+                //        GetWindowText(hWnd, sb, 100);
+                //        sb.Insert(0, "hwd: " + handle.ToInt32() + ", pid: " + processId.ToString() + ", ");
+                //        return true;
+                //    }, IntPtr.Zero);
+                //    yield return sb.ToString();
+                //}
+
                 GetWindowText(handle, sb, 100);
+                sb.Insert(0, "hwd: " + handle.ToInt32() + ", pid: " + processId.ToString() + ", ");
 
                 yield return sb.ToString();
             }
@@ -305,15 +322,29 @@ namespace Automation
             }
         }
 
-
-        protected delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+        public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+        public delegate bool EnumThreadWndProc(IntPtr hWnd, IntPtr lParam);
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        protected static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+        public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        protected static extern int GetWindowText(IntPtr hWnd, System.Text.StringBuilder lpString, int nMaxCount);
+        public static extern int GetWindowText(IntPtr hWnd, System.Text.StringBuilder lpString, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWindowVisible(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnumThreadWindows(int dwThreadId, EnumThreadWndProc lpfn, IntPtr lParam);
 
         protected static List<IntPtr> GetOpenWindowHandles()
         {
@@ -328,7 +359,7 @@ namespace Automation
                 // Get the window title
                 const int nChars = 256;
                 System.Text.StringBuilder title = new System.Text.StringBuilder(nChars);
-                if (GetWindowText(hWnd, title, nChars) > 0)
+                if (GetWindowText(hWnd, title, nChars) >= 0)
                 {
                     // Print or store the window handle
                     //Console.WriteLine($"Window Title: {title}, Handle: {hWnd}");
@@ -340,9 +371,6 @@ namespace Automation
 
             return windowHandles;
         }
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        protected static extern bool IsWindowVisible(IntPtr hWnd);
     }
 
 
