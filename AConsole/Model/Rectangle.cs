@@ -57,15 +57,8 @@ namespace AConsole.Model
             }
         }
 
-        public int Width()
-        {
-            return Points[2] - Points[0];
-        }
-
-        public int Height()
-        {
-            return Points[3] - Points[1] + 1;
-        }
+        public int Width => Points[2] - Points[0] + 1;
+        public int Height => Points[3] - Points[1] + 1;
 
         public override string ToString()
         {

@@ -11,9 +11,6 @@ namespace AWebService.Controllers
     [Route("[controller]")]
     public class AutomationController : ControllerBase
     {
-        private static Lazy<App> App = new Lazy<App>(()=> new App());
-        private App app = App.Value;
-
         private readonly ILogger<AutomationController> _logger;
 
         public AutomationController(ILogger<AutomationController> logger)
@@ -27,26 +24,6 @@ namespace AWebService.Controllers
         [HttpGet("StartRun")]
         public ActionResult StartRun()
         {
-            app.Start(@"D:\ETAX\BLR\BLRMENU.exe", @"D:\ETAX\BLR");
-            var ac = new ICommand[]
-            {
-                new FindAndClickCommand(app, "訊息公告",
-                    p => p.Name == "關閉"
-                ),
-                new KeyBoardCommand(app, VirtualKeyShort.ENTER),
-                new FindAndClickCommand(app, "建檔程式",
-                    p => p.ClassName == "TButton"
-                        && p.BoundingRectangle.X == 1096
-                ),
-                new KeyBoardCommand(app, VirtualKeyShort.ENTER),
-                new KeyBoardCommand(app, VirtualKeyShort.ENTER),
-            };
-            
-            foreach(var c in ac)
-            {
-                c.Call();
-            }
-
             return Ok();
         }
 
@@ -56,24 +33,6 @@ namespace AWebService.Controllers
         [HttpGet("RunStep1")]
         public ActionResult RunStep1()
         {
-            var ac = new ICommand[]
-            {
-                new FindCommand(app, "營業稅離線建檔系統"),
-            };
-            
-            foreach(var c in ac)
-            {
-                c.Call();
-            }
-
-            if(app.CurrentElement != null)
-            {
-                app.CurrentElement?.SetForeground();
-                Mouse.MoveTo(150, 230);
-                Mouse.LeftClick();
-                Keyboard.Type("82440940");
-                Keyboard.Pressing(VirtualKeyShort.ENTER);
-            }
             return Ok();
         }
 

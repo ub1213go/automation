@@ -11,7 +11,7 @@ namespace AConsole.Model.ConsoleUI
     {
         public void Clear(Rectangle rect)
         {
-            Render(rect, new string(' ', rect.Width() * rect.Height()));
+            Render(rect, new string(' ', rect.Width * rect.Height));
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace AConsole.Model.ConsoleUI
                 )
             );
             // 寬度
-            var w = rect.Width();
+            var w = rect.Width;
             // 長度
-            var h = rect.Height();
+            var h = rect.Height;
             var strs = obj.ToString().Split("\r\n").ToList();
             for (int i = 0; i < h && i < strs.Count; i++)
             {

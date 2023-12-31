@@ -11,19 +11,7 @@ namespace AConsole.Model.ConsoleUI
         public Rectangle ViewRect;
         public IRenderable<string> Cursor;
         public int Position = 0;
-        public int Length => ViewRect.Height();
-
-        public ConsoleView(IRenderable<string> cursor)
-        {
-            Cursor = cursor;
-
-            ViewRect = new Rectangle(
-                0,
-                0,
-                Console.WindowWidth,
-                Console.WindowHeight / 2
-            );
-        }
+        public int Length => ViewRect.Height;
 
         public ConsoleView(IRenderable<string> cursor, Rectangle rect)
         {

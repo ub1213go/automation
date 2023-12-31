@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Accessibility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,35 +9,69 @@ namespace AConsole.Model.ConsoleUI
 {
     public class ConsolePage : IConsolePage
     {
-        public List<ConsoleView> Views
-            = new List<ConsoleView>();
+        private ConsoleView View;
         public IRenderable<string> Cursor;
         public int Position = 0;
-
-        public ConsolePage(IRenderable<string> cursor)
+        public Rectangle ViewRect { get; set; }
+        public ConsolePage(IRenderable<string> cursor, Rectangle? viewRect = null)
         {
             Cursor = cursor;
-            Views.Add(new ConsoleView(cursor));
-        }
+            if(viewRect == null) 
+            {
+                ViewRect = new Rectangle(
+                    0,
+                    0,
+                    Console.WindowWidth,
+                    Console.WindowHeight / 2
+                );
+            }
+            else ViewRect = viewRect;
 
-        public void Clear()
-        {
-            Views[Position].Clear();
+            View = new ConsoleView(Cursor, ViewRect);
         }
 
         public void Render(ConsoleMenu menu)
         {
-            for (int i = 0; i < Views[Position].Length && i < menu.Length; i++)
+            for (int i = 0; i < menu.Length; i++)
             {
-                ConsoleColor? color = null;
-                if (menu.Position == i)
-                    color = new ConsoleColor(ConsoleColor.EColor.AntiWhite);
+                Position = menu.Position / ViewRect.Height;
 
-                Views[Position].Write($"{i + 1}. {menu[i]}");
+                if(Position * ViewRect.Height <= i && i < (Position + 1) * ViewRect.Height)
+                {
+                    ConsoleColor? color = null;
+                    if (menu.Position == i)
+                        color = new ConsoleColor(ConsoleColor.EColor.AntiWhite);
 
-                if (menu.Position == i)
-                    color?.Dispose();
+                    View.Write($"{i + 1}. {LimitLine(menu[i])}");
+
+                    if (menu.Position == i)
+                        color?.Dispose();
+                }
             }
+        }
+
+        public void Clear()
+        {
+            View.Clear();
+        }
+
+        private string LimitLine(string line)
+        {
+            var limit = Console.WindowWidth - 4;
+            var real = 0;
+            for(; real < line.Length && limit >= 0; real++)
+            {
+                limit -= char.GetUnicodeCategory(line[real]) == System.Globalization.UnicodeCategory.OtherLetter ? 2 : 1;
+            }
+
+            if (limit < 0) real -= 1;
+            limit = real;
+
+            if(line.Length > limit)
+            {
+                return line.Substring(0, limit);
+            }
+            return line;
         }
     }
 

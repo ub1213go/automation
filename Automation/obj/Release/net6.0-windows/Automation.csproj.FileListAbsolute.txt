@@ -1,0 +1,14 @@
+D:\OneDrive\Code\csharp\CodeLab\Automation\bin\Release\net6.0-windows\Automation.deps.json
+D:\OneDrive\Code\csharp\CodeLab\Automation\bin\Release\net6.0-windows\Automation.dll
+D:\OneDrive\Code\csharp\CodeLab\Automation\bin\Release\net6.0-windows\Automation.pdb
+D:\OneDrive\Code\csharp\CodeLab\Automation\bin\Release\net6.0-windows\Automation.xml
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.csproj.AssemblyReference.cache
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.GeneratedMSBuildEditorConfig.editorconfig
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.AssemblyInfoInputs.cache
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.AssemblyInfo.cs
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.csproj.CoreCompileInputs.cache
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.dll
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\refint\Automation.dll
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.xml
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\Automation.pdb
+D:\OneDrive\Code\csharp\CodeLab\Automation\obj\Release\net6.0-windows\ref\Automation.dll

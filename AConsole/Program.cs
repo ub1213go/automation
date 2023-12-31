@@ -15,6 +15,8 @@ namespace AConsole
         public static Draw? draw = null;
         static void Main(string[] args)
         {
+            Console.ResetColor();
+
             var auto = new Autofac();
             auto.Register<IRenderable<string>>(typeof(ConsoleCursor));
             auto.Register(typeof(ConsolePage));
@@ -38,7 +40,6 @@ namespace AConsole
             var hint = auto.Get<ConsoleHint>("hint");
             var menu = auto.Get<ConsoleMenu>();
             var page = auto.Get<ConsolePage>();
-            var count = 0;
 
             hint.SetHint("Q: 離開");
             hint.SetHint("J: 下一個");
@@ -46,90 +47,86 @@ namespace AConsole
             hint.SetHint("M: 紅框標記");
             hint.SetHint("Enter: 下一層");
             hint.SetHint("ESC: 上一層");
-            hint.SetHint("F: 下一頁");
-            hint.SetHint("B: 下一頁");
-            hint.SetHint("A: 動作");
+            hint.SetHint("R: 記錄此動作");
+            hint.SetHint("F: 取得焦點");
+            hint.SetHint("C: 點擊");
+            hint.SetHint("I: 輸入");
+
             AutoUI? autoUI = null;
+
+            menu.Subscription(new KeyEvent(() =>
+            {
+                menu.Done = true;
+            }), ConsoleKey.Q);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                menu.Position++;
+            }), ConsoleKey.J);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                menu.Position--;
+            }), ConsoleKey.K);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                if (autoUI == null)
+                    autoUI = service.GetWindow(menu.Current);
+                else
+                    autoUI = service.GetControlByParent(autoUI, menu.Position);
+                RefreshMenu(menu, ref autoUI);
+            }), ConsoleKey.Enter);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                if (autoUI != null)
+                    autoUI = new AutoUIWindow(service.Core, autoUI.AutomationElement?.Parent);
+                RefreshMenu(menu, ref autoUI);
+            }), ConsoleKey.Escape);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                if (draw != null)
+                {
+                    draw.Stop();
+                    draw = null;
+                }
+                else
+                {
+                    // 紅框框起光標指到的項目
+                    if (autoUI == null)
+                    {
+                        draw = new Draw(service.GetWindow(menu.Current));
+                        draw.Start();
+                    }
+                    else
+                    {
+                        draw = new Draw(service.GetControlByParent(autoUI, menu.Position));
+                        draw.Start();
+                    }
+                }
+            }), ConsoleKey.M);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                AllObject(auto);
+            }), ConsoleKey.T);
+            menu.Subscription(new KeyEvent(() =>
+            {
+                menu.Notify(ConsoleKey.Enter);
+                try
+                {
+                    autoUI.AutomationElement.Focus();
+                }
+                catch
+                {
+
+                }
+            }), ConsoleKey.F);
+
             RefreshMenu(menu, ref autoUI);
-            while (true)
+            foreach (var count in menu.Run())
             {
                 page.Clear();
                 page.Render(menu);
-                var key = Console.ReadKey(true).Key;
-                switch (key)
-                {
-                    case ConsoleKey.Q:
-                        goto Done;
-                    case ConsoleKey.J:
-                        menu.Position++;
-                        break;
-                    case ConsoleKey.K:
-                        menu.Position--;
-                        break;
-                    case ConsoleKey.Enter:
-                        // control == null -> 在桌面
-                        if (autoUI == null)
-                        {
-                            autoUI = service.GetWindow(menu.Current);
-                        }
-                        // control != null -> 視窗
-                        else
-                        {
-                            autoUI = service
-                                .GetControlByParent(autoUI, menu.Position);
-                        }
-                        RefreshMenu(menu, ref autoUI);
-                        break;
-                    case ConsoleKey.Escape:
-                        if(autoUI != null)
-                        {
-                            autoUI = new AutoUIWindow(
-                                service.Core,
-                                autoUI.AutomationElement?.Parent
-                            );
-
-                        }
-                        RefreshMenu(menu, ref autoUI);
-                        break;
-                    case ConsoleKey.M:
-                        if (draw != null)
-                        {
-                            draw.Stop();
-                            draw = null;
-                        }
-                        else
-                        {
-                            // 紅框框起光標指到的項目
-                            if (autoUI == null)
-                            {
-                                draw = new Draw(
-                                    service.GetWindow(
-                                        menu.Current
-                                    )
-                                );
-                                draw.Start();
-                            }
-                            else
-                            {
-                                draw = new Draw(
-                                    service.GetControlByParent(
-                                        autoUI,
-                                        menu.Position
-                                    )
-                                );
-                                draw.Start();
-                            }
-                        }
-                        break;
-                    case ConsoleKey.T:
-                        AllObject(auto);
-                        break;
-                }
-
             }
-
-        Done: return;
         }
+
 
         static void AllObject(Autofac auto)
         {
@@ -166,41 +163,5 @@ namespace AConsole
         }
     }
 
-    public class KeyIntractive : IObservable
-    {
-        private int loopLimit = 100;
-        private HashSet<IObserver> Subscribers
-            = new HashSet<IObserver>();
-        private Dictionary<ConsoleKey, IObserver> SpecifyNotify
-            = new Dictionary<ConsoleKey, IObserver>();
-        public void Subscription(IObserver observer, ConsoleKey key)
-        {
-            Subscribers.Add(observer);
-
-            if(!SpecifyNotify.ContainsKey(key))
-            {
-                SpecifyNotify.Add(key, observer);
-            }
-            else
-            {
-                SpecifyNotify[key] = observer;
-            }
-        }
-        public void Notify(ConsoleKey key)
-        {
-            if (SpecifyNotify.TryGetValue(key, out var val))
-            {
-                val.Update();
-            }
-        }
-        public IEnumerable<int> Run()
-        {
-            for (int i = 0; i < loopLimit; i++)
-            {
-                Notify(Console.ReadKey(true).Key);
-                yield return i;
-            }
-        }
-    }
 }
 

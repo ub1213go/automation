@@ -139,7 +139,7 @@ namespace AConsole.MyAutofac
                 }
                 obj = cont.Invoke(props);
 
-                CheckIn(obj);
+                CheckIn<T>(obj);
             } 
 
             return (T)obj;
@@ -185,7 +185,7 @@ namespace AConsole.MyAutofac
                     {
                         obj = cont.Invoke(args);
 
-                        CheckIn(obj);
+                        CheckIn<T>(obj);
 
                         return (T)obj;
                     };
@@ -196,7 +196,7 @@ namespace AConsole.MyAutofac
             throw new Exception($"{typeof(T).Name}-ID: {id} 不存在相符的參數設定");
         }
 
-        private void CheckIn(object obj)
+        private void CheckIn<T>(object obj)
         {
             if (auto.ObjectDict.ContainsKey(typeof(T)))
             {
