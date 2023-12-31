@@ -31,24 +31,26 @@ namespace AConsole
                         Console.WindowWidth,
                         Console.WindowHeight
                     )),
-                    6
+                    6,
+                    2
                 });
 
             var hint = auto.Get<ConsoleHint>("hint");
             var menu = auto.Get<ConsoleMenu>();
             var page = auto.Get<ConsolePage>();
-            //AllObject(auto);
-            //var service = new AutoService();
             var count = 0;
 
             hint.SetHint("Q: 離開");
-            hint.SetHint("J: 光標移至下一個");
-            hint.SetHint("K: 光標移至上一個");
+            hint.SetHint("J: 下一個");
+            hint.SetHint("K: 上一個");
             hint.SetHint("M: 紅框標記");
-            hint.SetHint("Enter: 進入下一層");
-            hint.SetHint("ESC: 回到上一層");
-            AutoUI? control = null;
-            RefreshMenu(menu, ref control);
+            hint.SetHint("Enter: 下一層");
+            hint.SetHint("ESC: 上一層");
+            hint.SetHint("F: 下一頁");
+            hint.SetHint("B: 下一頁");
+            hint.SetHint("A: 動作");
+            AutoUI? autoUI = null;
+            RefreshMenu(menu, ref autoUI);
             while (true)
             {
                 page.Clear();
@@ -66,27 +68,28 @@ namespace AConsole
                         break;
                     case ConsoleKey.Enter:
                         // control == null -> 在桌面
-                        if (control == null)
+                        if (autoUI == null)
                         {
-                            control = service.GetWindow(menu.Menus[menu.Position]);
+                            autoUI = service.GetWindow(menu.Menus[menu.Position]);
                         }
                         // control != null -> 視窗
                         else
                         {
-                            control = service
-                                .GetControlByParent(control, menu.Position);
+                            autoUI = service
+                                .GetControlByParent(autoUI, menu.Position);
                         }
-                        RefreshMenu(menu, ref control);
+                        RefreshMenu(menu, ref autoUI);
                         break;
                     case ConsoleKey.Escape:
-                        if(control != null)
+                        if(autoUI != null)
                         {
-                            control = new AutoUIWindow(service.Core)
-                            {
-                                AutomationElement = control.AutomationElement.Parent
-                            };
+                            autoUI = new AutoUIWindow(
+                                service.Core,
+                                autoUI.AutomationElement?.Parent
+                            );
+
                         }
-                        RefreshMenu(menu, ref control);
+                        RefreshMenu(menu, ref autoUI);
                         break;
                     case ConsoleKey.M:
                         if (draw != null)
@@ -97,12 +100,12 @@ namespace AConsole
                         else
                         {
                             // 紅框框起光標指到的項目
-                            if (control == null)
+                            if (autoUI == null)
                             {
                                 draw = new Draw(
                                     service.GetWindow(
-                                        menu.Menus[menu.Position]
-                                    ).AutomationElement.BoundingRectangle
+                                        menu.Current
+                                    )
                                 );
                                 draw.Start();
                             }
@@ -110,9 +113,9 @@ namespace AConsole
                             {
                                 draw = new Draw(
                                     service.GetControlByParent(
-                                        control,
+                                        autoUI,
                                         menu.Position
-                                    ).AutomationElement.BoundingRectangle
+                                    )
                                 );
                                 draw.Start();
                             }

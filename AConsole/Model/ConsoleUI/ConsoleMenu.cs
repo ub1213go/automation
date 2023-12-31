@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace AConsole.Model.ConsoleUI
 {
-    public class ConsoleMenu : IEnumerable<string>, IObservable<ConsoleEvent>
+    public class ConsoleMenu : IEnumerable<string>
     {
         public List<string> Menus { get; set; }
             = new List<string>();
 
         public int Length => Menus.Count;
+        public string Current => Menus[Position];
 
         private int _Position;
 
@@ -63,11 +64,6 @@ namespace AConsole.Model.ConsoleUI
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-        public void Subscription(IObserver<ConsoleEvent> observer)
-        {
-            throw new NotImplementedException();
         }
     }
 
