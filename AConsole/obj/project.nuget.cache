@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oWrsb0CrWN18WSClLBkpniuXwyrctvAQQY8aAH8bHpruqThQyh8Z7TPAkt1c315uQ1HHZx8UxT3S1rjqTu/TtQ==",
+  "dgSpecHash": "MpSkp2ksQbEC/O7m+QAwoMV0RW1YlFIthCIMAe9XCRS/bdVHAUMwe9IRw1kqdJQvmWVEPIgV3SaC3aElrmbXoQ==",
   "success": true,
   "projectFilePath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj",
   "expectedPackageFiles": [
@@ -35,7 +35,8 @@
     "C:\\Users\\ub\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.security.permissions\\5.0.0\\system.security.permissions.5.0.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
-    "C:\\Users\\ub\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
+    "C:\\Users\\ub\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
+    "C:\\Users\\ub\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.18362.31\\microsoft.windows.sdk.net.ref.10.0.18362.31.nupkg.sha512"
   ],
   "logs": []
 }

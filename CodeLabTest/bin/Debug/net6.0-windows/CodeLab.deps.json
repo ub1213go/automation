@@ -9,6 +9,7 @@
       "CodeLab/1.0.0": {
         "dependencies": {
           "Autofac": "7.1.0",
+          "Automation": "1.0.0",
           "FlaUI.Core": "4.0.0",
           "FlaUI.UIA3": "4.0.0",
           "Interop.UIAutomationClient": "10.19041.0",
@@ -799,6 +800,16 @@
             "fileVersion": "4.6.24705.1"
           }
         }
+      },
+      "Automation/1.0.0": {
+        "dependencies": {
+          "FlaUI.Core": "4.0.0",
+          "FlaUI.UIA3": "4.0.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "Automation.dll": {}
+        }
       }
     }
   },
@@ -1472,6 +1483,11 @@
       "sha512": "sha512-A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A==",
       "path": "system.xml.xpath.xmldocument/4.3.0",
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "Automation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

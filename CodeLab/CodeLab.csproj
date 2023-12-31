@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ASqlite\ASqlite.csproj" />
     <ProjectReference Include="..\Automation\Automation.csproj" />
   </ItemGroup>
 

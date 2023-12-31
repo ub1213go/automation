@@ -6,6 +6,7 @@ using AConsole.Model;
 using System.Drawing;
 using AConsole.Model.ConsoleUI;
 using Automation.Draw;
+using System.Text;
 
 namespace AConsole
 {
@@ -15,8 +16,6 @@ namespace AConsole
         public static Draw? draw = null;
         static void Main(string[] args)
         {
-            Console.ResetColor();
-
             var auto = new Autofac();
             auto.Register<IRenderable<string>>(typeof(ConsoleCursor));
             auto.Register(typeof(ConsolePage));

@@ -40,12 +40,15 @@ namespace AConsole.Model.ConsoleUI
                 {
                     ConsoleColor? color = null;
                     if (menu.Position == i)
-                        color = new ConsoleColor(ConsoleColor.EColor.AntiWhite);
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
 
                     View.Write($"{i + 1}. {LimitLine(menu[i])}");
 
                     if (menu.Position == i)
-                        color?.Dispose();
+                        Console.ResetColor();
                 }
             }
         }
