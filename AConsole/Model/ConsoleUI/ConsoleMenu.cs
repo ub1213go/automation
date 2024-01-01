@@ -41,19 +41,23 @@ namespace AConsole.Model.ConsoleUI
                 Menus[index] = value;
             }
         }
+
         public void SetMenu(string menu)
         {
             Menus.Add(menu);
         }
+
         public void Clear()
         {
             Position = 0;
             Menus.Clear();
         }
+
         public IEnumerator<string> GetEnumerator()
         {
             return Menus.GetEnumerator();
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AConsole.Model.ConsoleUI
 {
-    public class ConsolePage : IConsolePage
+    public class ConsolePage : IConsolePage, IVisitor
     {
         private ConsoleView View;
         public IRenderable<string> Cursor;
@@ -75,6 +75,11 @@ namespace AConsole.Model.ConsoleUI
                 return line.Substring(0, limit);
             }
             return line;
+        }
+
+        public void Visit(IElement ele)
+        {
+            ele.Accept(this);
         }
     }
 

@@ -1,16 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "ouYeYxxoscUrjQMelYcc+D+rPzKyMcjYIA/XpSMPsObVl1bkX2lHnzFn5+qSmRxj5U11ELj92KhSdR3l/ZE7Zw==",
+  "dgSpecHash": "ItM65nsQ4wfIl31C4MeXLxUQ3UiFVeblzTseLdPciE32r/3DPkeB/oJrOJcqIqOLWNorQKslWvwf5gl37o0OOw==",
   "success": true,
   "projectFilePath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\CodeLab\\CodeLab.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ub\\.nuget\\packages\\autofac\\7.1.0\\autofac.7.1.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\dapper\\2.1.24\\dapper.2.1.24.nupkg.sha512",
+    "C:\\Users\\ub\\.nuget\\packages\\dynamitey\\3.0.3\\dynamitey.3.0.3.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\epplus\\4.5.3.3\\epplus.4.5.3.3.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\flaui.core\\4.0.0\\flaui.core.4.0.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\flaui.uia3\\4.0.0\\flaui.uia3.4.0.0.nupkg.sha512",
+    "C:\\Users\\ub\\.nuget\\packages\\impromptuinterface\\8.0.4\\impromptuinterface.8.0.4.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\interop.uiautomationclient\\10.19041.0\\interop.uiautomationclient.10.19041.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\linqforeeplus\\1.0.1\\linqforeeplus.1.0.1.nupkg.sha512",
+    "C:\\Users\\ub\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\microsoft.data.sqlite\\8.0.0\\microsoft.data.sqlite.8.0.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.0\\microsoft.data.sqlite.core.8.0.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.0\\microsoft.extensions.configuration.3.1.0.nupkg.sha512",
@@ -72,6 +75,7 @@
     "C:\\Users\\ub\\.nuget\\packages\\system.management\\5.0.0\\system.management.5.0.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\ub\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.reflection.typeextensions\\4.3.0\\system.reflection.typeextensions.4.3.0.nupkg.sha512",
@@ -106,7 +110,8 @@
     "C:\\Users\\ub\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\ub\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\ub\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\ub\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.18362.31\\microsoft.windows.sdk.net.ref.10.0.18362.31.nupkg.sha512"
   ],
   "logs": []
 }

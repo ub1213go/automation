@@ -31,7 +31,7 @@ namespace AConsole.Model
         {
             if (SpecifyNotify.TryGetValue(key, out var val))
             {
-                val.Update();
+                val.Update(this);
             }
         }
         public IEnumerable<int> Run()

@@ -3,6 +3,8 @@ using Dapper;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using AConsole.Model.ConsoleUI;
+using AConsole.Model;
 
 namespace Program
 {
@@ -52,6 +54,19 @@ namespace Program
             //}
             #endregion
 
+            #region Route
+            var cursor = new ConsoleCursor();
+            var page = new ConsolePage(cursor);
+            var root = new ConsoleRoute("Home", "首頁");
+            var edit = new ConsoleRoute("Edit", "編輯");
+            var load = new ConsoleRoute("Load", "讀取");
+            var toFile = new ConsoleRoute("ToFile", "從檔案");
+            root.Add(edit);
+            root.Add(load);
+            load.Add(toFile);
+
+            page.Visit(load);
+            #endregion
 
         }
     }

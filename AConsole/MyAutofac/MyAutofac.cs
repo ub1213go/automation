@@ -24,6 +24,8 @@ namespace AConsole.MyAutofac
             = new Dictionary<Type, List<object>>();
         internal protected Dictionary<string, object[]> ObjectArgumentsDict
             = new Dictionary<string, object[]>();
+        protected static Lazy<Autofac> _Instance = new Lazy<Autofac>(() => new Autofac());
+        public static Autofac auto => _Instance.Value;
         public AutofacEnter Enter => new AutofacEnter(this);
         public AutofacProvider Provider => new AutofacProvider(this);
         public AutofacEnter Register<T>(Type type) => Enter.Register<T>(type);

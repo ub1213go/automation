@@ -4,6 +4,90 @@
     "D:\\OneDrive\\Code\\csharp\\CodeLab\\CodeLab\\CodeLab.csproj": {}
   },
   "projects": {
+    "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj",
+        "projectName": "AConsole",
+        "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj",
+        "packagesPath": "C:\\Users\\ub\\.nuget\\packages\\",
+        "outputPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ub\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows10.0.18362.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows10.0.18362": {
+            "targetAlias": "net6.0-windows10.0.18362.0",
+            "projectReferences": {
+              "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj": {
+                "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj"
+              },
+              "D:\\OneDrive\\Code\\csharp\\CodeLab\\Automation\\Automation.csproj": {
+                "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\Automation\\Automation.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows10.0.18362": {
+          "targetAlias": "net6.0-windows10.0.18362.0",
+          "dependencies": {
+            "ImpromptuInterface": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Windows.SDK.NET.Ref",
+              "version": "[10.0.18362.31, 10.0.18362.31]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.Windows.SDK.NET.Ref": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -173,16 +257,19 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net6.0-windows10.0.18362.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net6.0-windows10.0.18362": {
+            "targetAlias": "net6.0-windows10.0.18362.0",
             "projectReferences": {
+              "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj": {
+                "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj"
+              },
               "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj": {
                 "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj"
               },
@@ -199,8 +286,8 @@
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net6.0-windows10.0.18362": {
+          "targetAlias": "net6.0-windows10.0.18362.0",
           "dependencies": {
             "Autofac": {
               "target": "Package",
@@ -242,8 +329,17 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Windows.SDK.NET.Ref",
+              "version": "[10.0.18362.31, 10.0.18362.31]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },

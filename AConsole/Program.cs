@@ -19,17 +19,15 @@ namespace AConsole
         public static Draw? draw = null;
         static void Main(string[] args)
         {
-            var auto = new Autofac();
-            auto.Register<IRenderable<string>>(typeof(ConsoleCursor));
-            auto.Register(typeof(ConsolePage));
-            auto.Register(typeof(ConsoleMenu));
-            auto.Register(typeof(AutoService));
-            auto.Single().Register(typeof(ConsoleCursor));
-
-            auto.Register(typeof(ConsoleHint))
+            Autofac.auto.Register<IRenderable<string>>(typeof(ConsoleCursor));
+            Autofac.auto.Register(typeof(ConsolePage));
+            Autofac.auto.Register(typeof(ConsoleMenu));
+            Autofac.auto.Register(typeof(AutoService));
+            Autofac.auto.Single().Register(typeof(ConsoleCursor));
+            Autofac.auto.Register(typeof(ConsoleHint))
                 .WithParameter("hint", new object[]{
-                    auto.Get<ConsoleCursor>(),
-                    new ConsoleView(auto.Get<ConsoleCursor>(), new Model.Rectangle(
+                    Autofac.auto.Get<ConsoleCursor>(),
+                    new ConsoleView(Autofac.auto.Get<ConsoleCursor>(), new Model.Rectangle(
                         0,
                         Console.WindowHeight / 6 * 5,
                         Console.WindowWidth,
@@ -39,131 +37,132 @@ namespace AConsole
                     2
                 });
 
-            var hint = auto.Get<ConsoleHint>("hint");
-            var menu = auto.Get<ConsoleMenu>();
-            var page = auto.Get<ConsolePage>();
+            var cursor = new ConsoleCursor();
+            var page = new ConsolePage(cursor);
+            var edit = new ConsoleRoute("Edit", "編輯");
+            var load = new ConsoleRoute("Load", "讀取");
+            var root = new ConsoleRoute( "Home", "首頁");
 
-            hint.SetHint("Q: 離開");
-            hint.SetHint("J: 下一個");
-            hint.SetHint("K: 上一個");
-            hint.SetHint("M: 紅框標記");
-            hint.SetHint("Enter: 下一層");
-            hint.SetHint("ESC: 上一層");
-            hint.SetHint("R: 記錄此動作");
-            hint.SetHint("F: 取得焦點");
-            hint.SetHint("C: 點擊");
-            hint.SetHint("I: 輸入");
-            hint.SetHint("G: 5秒後取得焦點視窗");
-
-            AutoUI? autoUI = null;
-
-            menu.Subscription(new KeyEvent(() =>
+            root.Add(load);
+            root.Add(edit);
+            root.Subscription(new KeyEvent(() =>
             {
-                menu.Done = true;
+                root.Menu.Done = true;
             }), ConsoleKey.Q);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                menu.Position++;
-            }), ConsoleKey.J);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                menu.Position--;
-            }), ConsoleKey.K);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                //var pid = Convert.ToInt32(menu.Current.Split(",").First().Replace("pid: ", ""));
-                //var pcs = Process.GetProcessById(pid);
-                //var ths = pcs.Threads;
-                //foreach(ProcessThread th in ths)
-                //{
-                //    var sb = new StringBuilder(100);
-                //    AutoService.EnumThreadWindows(th.Id, (hWnd, lParam) =>
-                //    {
-                //        var res = AutoService.GetWindowText(hWnd, sb, 100);
-                //        var t = service.Core.AutoCore.FromHandle(hWnd);
-                //        Console.WriteLine(sb);
-                //        return res > 0;
-                //    }, IntPtr.Zero);
-                //}
-                if (autoUI == null)
-                    //autoUI = service.GetWindow(String.Join("", menu.Current.Split(",").Skip(1)));
-                    autoUI = new AutoUIWindow(service.Core, service.Core.AutoCore.FromHandle(IntPtr.Parse(menu.Current.Split(",").First().Replace("hwd: ", ""))));
-                else
-                    autoUI = service.GetControlByParent(autoUI, menu.Position);
-                RefreshMenu(menu, ref autoUI);
-            }), ConsoleKey.Enter);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                if (autoUI != null)
-                    autoUI = new AutoUIWindow(service.Core, autoUI.AutomationElement?.Parent);
-                RefreshMenu(menu, ref autoUI);
-            }), ConsoleKey.Escape);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                if (draw != null)
-                {
-                    draw.Stop();
-                    draw = null;
-                }
-                else
-                {
-                    // 紅框框起光標指到的項目
-                    if (autoUI == null)
-                    {
-                        draw = new Draw(service.GetWindow(menu.Current));
-                        draw.Start();
-                    }
-                    else
-                    {
-                        draw = new Draw(service.GetControlByParent(autoUI, menu.Position));
-                        draw.Start();
-                    }
-                }
-            }), ConsoleKey.M);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                AllObject(auto);
-            }), ConsoleKey.T);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                menu.Notify(ConsoleKey.Enter);
-                try
-                {
-                    autoUI.AutomationElement.Focus();
-                }
-                catch
-                {
+            root.Hint.SetHint("Q: 離開");
+            page.Visit(root);
 
-                }
-            }), ConsoleKey.F);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                menu.Notify(ConsoleKey.Enter);
-                try
-                {
-                    autoUI.AutomationElement.Click();
-                }
-                catch
-                {
 
-                }
-            }), ConsoleKey.C);
-            menu.Subscription(new KeyEvent(() =>
-            {
-                Thread.Sleep(5000);
-                IntPtr hwd = AutoService.GetForegroundWindow();
-                autoUI = new AutoUIWindow(service.Core, service.Core.AutoCore.FromHandle(hwd));
-                int pcsId = 0;
-                AutoService.GetWindowThreadProcessId(hwd, out pcsId);
-                RefreshMenu(menu, ref autoUI);
-            }), ConsoleKey.G);
+            //var hint = auto.Get<ConsoleHint>("hint");
+            //var menu = auto.Get<ConsoleMenu>();
+            //var page = auto.Get<ConsolePage>();
 
-            RefreshMenu(menu, ref autoUI);
-            foreach (var count in menu.Run())
-            {
-                page.Clear();
-                page.Render(menu);
-            }
+            //hint.SetHint("Q: 離開");
+            //hint.SetHint("J: 下一個");
+            //hint.SetHint("K: 上一個");
+            //hint.SetHint("M: 紅框標記");
+            //hint.SetHint("Enter: 下一層");
+            //hint.SetHint("ESC: 上一層");
+            //hint.SetHint("R: 記錄此動作");
+            //hint.SetHint("F: 取得焦點");
+            //hint.SetHint("C: 點擊");
+            //hint.SetHint("I: 輸入");
+            //hint.SetHint("G: 5秒後取得焦點視窗");
+
+            //AutoUI? autoUI = null;
+
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    menu.Done = true;
+            //}), ConsoleKey.Q);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    menu.Position++;
+            //}), ConsoleKey.J);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    menu.Position--;
+            //}), ConsoleKey.K);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    if (autoUI == null)
+            //        autoUI = new AutoUIWindow(service.Core, service.Core.AutoCore.FromHandle(IntPtr.Parse(menu.Current.Split(",").First().Replace("hwd: ", ""))));
+            //    else
+            //        autoUI = service.GetControlByParent(autoUI, menu.Position);
+            //    RefreshMenu(menu, ref autoUI);
+            //}), ConsoleKey.Enter);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    if (autoUI != null)
+            //        autoUI = new AutoUIWindow(service.Core, autoUI.AutomationElement?.Parent);
+            //    RefreshMenu(menu, ref autoUI);
+            //}), ConsoleKey.Escape);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    if (draw != null)
+            //    {
+            //        draw.Stop();
+            //        draw = null;
+            //    }
+            //    else
+            //    {
+            //        // 紅框框起光標指到的項目
+            //        if (autoUI == null)
+            //        {
+            //            draw = new Draw(service.GetWindow(menu.Current));
+            //            draw.Start();
+            //        }
+            //        else
+            //        {
+            //            draw = new Draw(service.GetControlByParent(autoUI, menu.Position));
+            //            draw.Start();
+            //        }
+            //    }
+            //}), ConsoleKey.M);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    AllObject(auto);
+            //}), ConsoleKey.T);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    menu.Notify(ConsoleKey.Enter);
+            //    try
+            //    {
+            //        autoUI.AutomationElement.Focus();
+            //    }
+            //    catch
+            //    {
+
+            //    }
+            //}), ConsoleKey.F);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    menu.Notify(ConsoleKey.Enter);
+            //    try
+            //    {
+            //        autoUI.AutomationElement.Click();
+            //    }
+            //    catch
+            //    {
+
+            //    }
+            //}), ConsoleKey.C);
+            //menu.Subscription(new KeyEvent(() =>
+            //{
+            //    Thread.Sleep(5000);
+            //    IntPtr hwd = AutoService.GetForegroundWindow();
+            //    autoUI = new AutoUIWindow(service.Core, service.Core.AutoCore.FromHandle(hwd));
+            //    //int pcsId = 0;
+            //    //AutoService.GetWindowThreadProcessId(hwd, out pcsId);
+            //    RefreshMenu(menu, ref autoUI);
+            //}), ConsoleKey.G);
+
+            //RefreshMenu(menu, ref autoUI);
+            //foreach (var count in menu.Run())
+            //{
+            //    page.Clear();
+            //    page.Render(menu);
+            //}
         }
 
 
