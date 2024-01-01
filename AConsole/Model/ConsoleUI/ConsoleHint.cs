@@ -10,6 +10,9 @@ namespace AConsole.Model.ConsoleUI
 {
     public class ConsoleHint : IEnumerable<string>
     {
+
+        private List<string> Hints { get; set; }
+            = new List<string>();
         public ConsoleView[] Views { get; set; }
         public ConsoleView VisibleView { get; set; }
 
@@ -33,9 +36,7 @@ namespace AConsole.Model.ConsoleUI
 
         public ConsoleHint SetHint(string cnt)
         {
-            Views[Position++].Write(cnt);
-
-            if (Position == Views.Length) Position = 0;
+            Hints.Add(cnt);
 
             return this;
         }
@@ -68,6 +69,23 @@ namespace AConsole.Model.ConsoleUI
                 idx / Columns
             );
             return res;
+        }
+
+        public void Render()
+        {
+            Position = 0;
+
+            foreach(var hint in Hints)
+            {
+                Views[Position++].Write(hint);
+            }
+
+            if (Position == Views.Length) Position = 0;
+        }
+
+        public void Clear()
+        {
+            VisibleView.Clear();
         }
     }
 

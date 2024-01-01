@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ItM65nsQ4wfIl31C4MeXLxUQ3UiFVeblzTseLdPciE32r/3DPkeB/oJrOJcqIqOLWNorQKslWvwf5gl37o0OOw==",
+  "dgSpecHash": "Jfdk5RhtH00fEaFbVjtMQsuZWvmBJAibO20x6y1ajMoBkj7n35XDhLuaqRjX6H9uIhRUPlFtwnT04Xg0vhI/1Q==",
   "success": true,
   "projectFilePath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\CodeLab\\CodeLab.csproj",
   "expectedPackageFiles": [
@@ -110,8 +110,7 @@
     "C:\\Users\\ub\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\ub\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\ub\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\ub\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.18362.31\\microsoft.windows.sdk.net.ref.10.0.18362.31.nupkg.sha512"
+    "C:\\Users\\ub\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

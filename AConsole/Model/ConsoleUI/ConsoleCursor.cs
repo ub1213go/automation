@@ -39,7 +39,7 @@ namespace AConsole.Model.ConsoleUI
             for (int i = 0; i < h && i < strs.Count; i++)
             {
                 var str = strs[i];
-                var subh = (int)Math.Floor((double)str.Length / w) + 1;
+                var subh = Math.Min((int)Math.Floor((double)str.Length / w) + 1, h);
                 for (int j = 0; j < subh; j++)
                 {
                     // 每個換行點

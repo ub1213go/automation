@@ -263,9 +263,9 @@ namespace Automation
             var method = type.GetMethod(method_name);
             var parameters = method?.GetParameters();
             if (parameters == null || (parameters?.Length ?? 0) == 0) 
-                throw new Exception($"{method.Name} 此方法無參數，與預期不同");
+                throw new Exception($"{method?.Name} 此方法無參數，與預期不同");
 
-            object[] props = new object[parameters.Length];
+            object[] props = new object[parameters?.Length ?? 0];
             for (int i = 0; i < props.Length; i++)
             {
                 if (parameters[i].HasDefaultValue)
@@ -278,9 +278,13 @@ namespace Automation
                 }
             }
 
-            return method.Invoke(obj, props);
+            return method?.Invoke(obj, props);
         }
-        public IEnumerable<string> GetAllWindowTitle()
+        /// <summary>
+        /// 回傳視窗 handle 與名稱
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Tuple<string, string>> GetAllWindowTitle()
         {
             var handles = GetOpenWindowHandles();
             var sb = new StringBuilder(100);
@@ -304,7 +308,7 @@ namespace Automation
                 GetWindowText(handle, sb, 100);
                 sb.Insert(0, "hwd: " + handle.ToInt32() + ", pid: " + processId.ToString() + ", ");
 
-                yield return sb.ToString();
+                yield return Tuple.Create(handle.ToInt32().ToString(), sb.ToString());
             }
         }
         public IEnumerable<string> GetWindowListByParent(AutoUI parent)
@@ -314,11 +318,16 @@ namespace Automation
                 yield return child.ToString();
             }
         }
-        public IEnumerable<string> GetControlListByParent(AutoUI parent)
+        /// <summary>
+        /// 傳回 AutomationId 和名稱
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        public IEnumerable<Tuple<string, string>> GetControlListByParent(AutoUI parent)
         {
             foreach(var child in parent.AutomationElement.FindAllChildren())
             {
-                yield return child.ToString();
+                yield return Tuple.Create(child.Name, child.ToString());
             }
         }
 

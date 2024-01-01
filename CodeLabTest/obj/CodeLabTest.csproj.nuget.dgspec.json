@@ -25,15 +25,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows10.0.18362.0"
+          "net6.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows10.0.18362": {
-            "targetAlias": "net6.0-windows10.0.18362.0",
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows7.0",
             "projectReferences": {
               "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj": {
                 "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj"
@@ -51,8 +51,8 @@
         }
       },
       "frameworks": {
-        "net6.0-windows10.0.18362": {
-          "targetAlias": "net6.0-windows10.0.18362.0",
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows7.0",
           "dependencies": {
             "ImpromptuInterface": {
               "target": "Package",
@@ -70,17 +70,8 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.Windows.SDK.NET.Ref",
-              "version": "[10.0.18362.31, 10.0.18362.31]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },
@@ -282,6 +273,28 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "LinqForEEPlus": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.5.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.4.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -293,6 +306,11 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
         }
       }
@@ -318,15 +336,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows10.0.18362.0"
+          "net6.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows10.0.18362": {
-            "targetAlias": "net6.0-windows10.0.18362.0",
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows7.0",
             "projectReferences": {
               "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj": {
                 "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\AConsole\\AConsole.csproj"
@@ -347,8 +365,8 @@
         }
       },
       "frameworks": {
-        "net6.0-windows10.0.18362": {
-          "targetAlias": "net6.0-windows10.0.18362.0",
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows7.0",
           "dependencies": {
             "Autofac": {
               "target": "Package",
@@ -390,17 +408,8 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.Windows.SDK.NET.Ref",
-              "version": "[10.0.18362.31, 10.0.18362.31]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },

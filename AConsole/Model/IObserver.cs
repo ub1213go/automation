@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace AConsole.Model
 {
-    public interface IObservable
+    public interface IObservable<T>
     {
-        void Subscription(IObserver observer, ConsoleKey key);
+        void Subscription(IObserver<T> observer, ConsoleKey key);
         void Notify(ConsoleKey key);
     }
-    public interface IObserver
+    public interface IObserver<T>
     {
-        void Update(object obj);
+        void Update(T obj);
     }
 }

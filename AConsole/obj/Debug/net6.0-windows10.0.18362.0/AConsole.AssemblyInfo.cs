@@ -19,7 +19,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyTitleAttribute("AConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows10.0.18362.0")]
-[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows10.0.18362.0")]
+[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 
 // 由 MSBuild WriteCodeFragment 類別產生。
 

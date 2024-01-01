@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace AConsole.Model
 {
-    public class KeyIntractive : IObservable
+    public abstract class KeyInteractive<T> : IObservable<T>
     {
-        private int loopLimit = 1000;
-        private HashSet<IObserver> Subscribers
-            = new HashSet<IObserver>();
-        private Dictionary<ConsoleKey, IObserver> SpecifyNotify
-            = new Dictionary<ConsoleKey, IObserver>();
+        protected int loopLimit = 1000;
+        protected HashSet<IObserver<T>> Subscribers
+            = new HashSet<IObserver<T>>();
+        protected Dictionary<ConsoleKey, IObserver<T>> SpecifyNotify
+            = new Dictionary<ConsoleKey, IObserver<T>>();
         public bool Done { get; set; }
-        public void Subscription(IObserver observer, ConsoleKey key)
+        public static StringBuilder Buffer {  get; set; } 
+            = new StringBuilder();
+        public void Subscription(IObserver<T> observer, ConsoleKey key)
         {
             Subscribers.Add(observer);
 
@@ -27,13 +29,9 @@ namespace AConsole.Model
                 SpecifyNotify[key] = observer;
             }
         }
-        public void Notify(ConsoleKey key)
-        {
-            if (SpecifyNotify.TryGetValue(key, out var val))
-            {
-                val.Update(this);
-            }
-        }
+
+        public abstract void Notify(ConsoleKey key);
+
         public IEnumerable<int> Run()
         {
             for (int i = 0; i < loopLimit && !Done; i++)

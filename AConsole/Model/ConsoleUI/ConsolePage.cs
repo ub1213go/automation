@@ -38,14 +38,13 @@ namespace AConsole.Model.ConsoleUI
 
                 if(Position * ViewRect.Height <= i && i < (Position + 1) * ViewRect.Height)
                 {
-                    ConsoleColor? color = null;
                     if (menu.Position == i)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
 
-                    View.Write($"{i + 1}. {LimitLine(menu[i])}");
+                    View.Write($"{i + 1}. {LimitLine(menu[i].Item2)}");
 
                     if (menu.Position == i)
                         Console.ResetColor();

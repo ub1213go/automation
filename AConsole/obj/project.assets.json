@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows10.0.18362": {
+    "net6.0-windows7.0": {
       "Dapper/2.1.24": {
         "type": "package",
         "compile": {
@@ -1653,7 +1653,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0-windows10.0.18362": [
+    "net6.0-windows7.0": [
       "ASqlite >= 1.0.0",
       "Automation >= 1.0.0",
       "ImpromptuInterface >= 8.0.4"
@@ -1686,15 +1686,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0-windows10.0.18362.0"
+        "net6.0-windows7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0-windows10.0.18362": {
-          "targetAlias": "net6.0-windows10.0.18362.0",
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows7.0",
           "projectReferences": {
             "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj": {
               "projectPath": "D:\\OneDrive\\Code\\csharp\\CodeLab\\ASqlite\\ASqlite.csproj"
@@ -1712,8 +1712,8 @@
       }
     },
     "frameworks": {
-      "net6.0-windows10.0.18362": {
-        "targetAlias": "net6.0-windows10.0.18362.0",
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows7.0",
         "dependencies": {
           "ImpromptuInterface": {
             "target": "Package",
@@ -1731,17 +1731,8 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.Windows.SDK.NET.Ref",
-            "version": "[10.0.18362.31, 10.0.18362.31]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          },
-          "Microsoft.Windows.SDK.NET.Ref": {
             "privateAssets": "all"
           }
         },

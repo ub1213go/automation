@@ -10,8 +10,9 @@ namespace AConsole.Model.ConsoleUI
 {
     public class ConsoleRoute : IElement
     {
-        private List<ConsoleRoute> Routes { get; set; }
+        public List<ConsoleRoute> Children { get; set; }
             = new List<ConsoleRoute>();
+        public ConsoleRoute Parent { get; set; } 
         public ConsoleMenu Menu { get; set; }
         public ConsoleHint Hint { get; set; }
         public string Name {  get; set; }
@@ -23,40 +24,35 @@ namespace AConsole.Model.ConsoleUI
             Menu = Autofac.auto.Get<ConsoleMenu>();
             Hint = Autofac.auto.Get<ConsoleHint>("hint");
 
-            Routes.AddRange(routes);
+            Children.AddRange(routes);
         }
 
-        public void Add(ConsoleRoute route)
+        public void Add(ConsoleRoute? route)
         {
-            Routes.Add(route);
+            if(route != null)
+            {
+                Children.Add(route);
+                route.Parent = this;
+            }
         }
 
         public void Accept(IVisitor visitor)
         {
-            foreach(var r in Routes)
-            {
-                Menu.SetMenu(r.Title);
-            }
+            visitor.Clear();
             visitor.Render(Menu);
+            Hint.Clear();
+            Hint.Render();
             foreach(var loop in Menu.Run())
             {
-
+                visitor.Clear();
+                visitor.Render(Menu);
             }
         }
 
-        public void Subscription(IObserver observer, ConsoleKey key)
+        public void Subscription(IObserver<ConsoleMenu> observer, ConsoleKey key)
         {
             Menu.Subscription(observer, key);
         }
     }
 
-    public interface IElement
-    {
-        void Accept(IVisitor visitor);
-    }
-
-    public interface IVisitor : IConsolePage
-    {
-        void Visit(IElement ele);
-    }
 }

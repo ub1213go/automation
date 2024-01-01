@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace AConsole.Model
 {
-    public class KeyEvent : IObserver
+    public class KeyEvent<T> : IObserver<T>
     {
-        private Action<object> action { get; set; }
-        public KeyEvent(Action<object> action)
+        private Action<T> action { get; set; }
+        public KeyEvent(Action<T> action)
         {
             this.action = action;
         }
-        public void Update(object obj)
+        public void Update(T obj)
         {
             action(obj);
         }
