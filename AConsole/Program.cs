@@ -41,7 +41,22 @@ namespace AConsole
             var page = new ConsolePage(cursor);
             var edit = new ConsoleRoute("Edit", "編輯");
             var load = new ConsoleRoute("Load", "讀取");
-            var root = new ConsoleRoute( "Home", "首頁");
+            var root = new ConsoleRoute("Home", "首頁");
+
+            var defKeyEvents = new Dictionary<ConsoleKey, KeyEvent>()
+            {
+                {
+                    ConsoleKey.Q, new KeyEvent(e =>
+                    {
+                        e.Done = true;
+                    })
+                },
+                {
+                    ConsoleKey.J, new KeyEvent(e =>
+                    {
+                    })
+                }
+            };
 
             root.Add(load);
             root.Add(edit);

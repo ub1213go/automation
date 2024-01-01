@@ -9,14 +9,14 @@ namespace AConsole.Model
 {
     public class KeyEvent : IObserver
     {
-        private Action<KeyIntractive> action { get; set; }
-        public KeyEvent(Action<KeyIntractive> action)
+        private Action<object> action { get; set; }
+        public KeyEvent(Action<object> action)
         {
             this.action = action;
         }
-        public void Update(KeyIntractive menu)
+        public void Update(object obj)
         {
-            action(menu);
+            action(obj);
         }
     }
 }
