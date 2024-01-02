@@ -44,6 +44,8 @@ namespace AConsole.Model.ConsoleUI
             Hint.Render();
             foreach(var loop in Menu.Run())
             {
+                Hint.Clear();
+                Hint.Render();
                 visitor.Clear();
                 visitor.Render(Menu);
             }
