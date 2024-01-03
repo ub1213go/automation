@@ -86,6 +86,10 @@ namespace AConsole.Model.ConsoleUI
         public void Clear()
         {
             VisibleView.Clear();
+            foreach(var view in Views)
+            {
+                view.Clear();
+            }
         }
     }
 
