@@ -46,55 +46,6 @@ namespace AConsole
 
             rv.EnterTo("Home");
 
-            //var cursor = new ConsoleCursor();
-            //var page = new ConsolePage(cursor);
-            //var edit = new ConsoleRoute("Edit", "編輯");
-            //var load = new ConsoleRoute("Load", "讀取");
-            //var root = new ConsoleRoute("Home", "首頁");
-
-
-            //root.Add(load);
-            //root.Add(edit);
-            //root.Add(new ConsoleRoute("Test", "測試"));
-            //root.Add(new ConsoleRoute("Test", "測試"));
-            //root.Add(new ConsoleRoute("Test", "測試"));
-            //root.Add(new ConsoleRoute("Test", "測試"));
-            //root.Add(new ConsoleRoute("Test", "測試"));
-            //root.Add(new ConsoleRoute("Test", "測試"));
-            //root.Add(new ConsoleRoute("Test", "測試"));
-            //foreach(var d in defKeyEvents)
-            //{
-            //    root.Subscription(d.Value, d.Key);
-            //}
-            //root.Hint.SetHint("Q: 離開");
-            //page.Visit(root);
-
-
-            //var hint = auto.Get<ConsoleHint>("hint");
-            //var menu = auto.Get<ConsoleMenu>();
-            //var page = auto.Get<ConsolePage>();
-
-            //hint.SetHint("Q: 離開");
-            //hint.SetHint("J: 下一個");
-            //hint.SetHint("K: 上一個");
-            //hint.SetHint("M: 紅框標記");
-            //hint.SetHint("Enter: 下一層");
-            //hint.SetHint("ESC: 上一層");
-            //hint.SetHint("R: 記錄此動作");
-            //hint.SetHint("F: 取得焦點");
-            //hint.SetHint("C: 點擊");
-            //hint.SetHint("I: 輸入");
-            //hint.SetHint("G: 5秒後取得焦點視窗");
-
-            //AutoUI? autoUI = null;
-
-
-            //RefreshMenu(menu, ref autoUI);
-            //foreach (var count in menu.Run())
-            //{
-            //    page.Clear();
-            //    page.Render(menu);
-            //}
         }
 
 

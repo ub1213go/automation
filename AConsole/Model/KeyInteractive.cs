@@ -34,10 +34,11 @@ namespace AConsole.Model
 
         public IEnumerable<int> Run()
         {
+            Done = false;
             for (int i = 0; i < loopLimit && !Done; i++)
             {
-                yield return i;
                 Notify(Console.ReadKey(true).Key);
+                yield return i;
             }
         }
     }
