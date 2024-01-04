@@ -34,5 +34,18 @@
             映射方法並呼叫
             </summary>
         </member>
+        <member name="M:Automation.AutoService.GetAllWindowTitle">
+            <summary>
+            回傳視窗 handle 與名稱
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Automation.AutoService.GetControlListByParent(Automation.AutoUI)">
+            <summary>
+            傳回 AutomationId 和名稱
+            </summary>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
